@@ -1,26 +1,24 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
- * User: PC_103
+ * User: c3stream
  * Date: 13/06/06
  * Time: 16:31
- * To change this template use File | Settings | File Templates.
  */
 
-namespace Libs\DBConnection;
+namespace libs\db\DBConnection;
 
-class DBPDOConnectionClass {
+class DBPDOConnectionClass extends PDO {
 
-    private   $_data_base;
-    private   $_data_base_name;
-    private   $_data_base_user;
-    private   $_data_base_pass;
-    private   $_data_base_host;
-    private   $_data_base_port;
-    private   $_data_base_net_string;
-    private   $_data_base_connection_string;
-    private   $_data_base_connection = null;
-    private   $_data_base_connection_pooling = false;
+    private $_data_base;
+    private $_data_base_name;
+    private $_data_base_user;
+    private $_data_base_pass;
+    private $_data_base_host;
+    private $_data_base_port;
+    private $_data_base_net_string;
+    private $_data_base_connection_string;
+    private $_data_base_connection = null;
+    private $_data_base_connection_pooling = false;
 
     function __construct($data_base, $data_base_user, $data_base_name = "" , $data_base_pass = "", $_data_base_connection_pooling = false,$data_base_host = false, $data_base_port = false){
         if(empty($data_base)){
@@ -32,7 +30,7 @@ class DBPDOConnectionClass {
         if(!is_bool($_data_base_connection_pooling)){
             throw new \Exception("WARNING! SET DB CONNECTION POOLING BOOLEAN!");
         }
-        $this->_data_base      = $data_base;
+        $this->_data_base = $data_base;
         $this->_data_base_user = $data_base_user;
         $this->_data_base_connection_pooling = $_data_base_connection_pooling;
         $this->_data_base_pass = empty($data_base_pass) ? '': $data_base_pass;
@@ -49,7 +47,7 @@ class DBPDOConnectionClass {
         $this->_Connection();
     }
 
-    function  __destruct(){
+    function __destruct(){
         if(!$this->_data_base_connection_pooling){
             $this->_data_base_connection = null;
             unset($this->_data_base_connection);
