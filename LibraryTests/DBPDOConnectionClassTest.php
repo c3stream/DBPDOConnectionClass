@@ -1,10 +1,8 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
- * User: PC_103
+ * User: c3stream
  * Date: 13/06/06
  * Time: 20:06
- * To change this template use File | Settings | File Templates.
  */
 
 require_once(dirname(dirname(__FILE__))."/DBPDOConnectionClass/DBPDOConnectionClass.php");
@@ -17,4 +15,4 @@ try{
     exit;
 }
 
-echo "接続成功";
+echo "Success Connection";
