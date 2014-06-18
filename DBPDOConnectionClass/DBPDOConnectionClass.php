@@ -7,7 +7,7 @@
 
 namespace libs\db\DBConnection;
 
-class DBPDOConnectionClass extends PDO {
+class DBPDOConnectionClass extends \PDO {
 
     private $_data_base;
     private $_data_base_name;
@@ -56,16 +56,16 @@ class DBPDOConnectionClass extends PDO {
     private function _Connection(){
         try {
             if($this->_data_base_connection_pooling){
-                $this->_data_base_connection = new \PDO($this->_data_base_connection_string , $this->_data_base_user, $this->_data_base_pass, array(\PDO::ATTR_PERSISTENT => true));
+                $this->_data_base_connection = parent::__construct($this->_data_base_connection_string , $this->_data_base_user, $this->_data_base_pass, array(\PDO::ATTR_PERSISTENT => true));
             } else {
-                $this->_data_base_connection = new \PDO($this->_data_base_connection_string , $this->_data_base_user, $this->_data_base_pass, array(\PDO::ATTR_PERSISTENT => false));
+                $this->_data_base_connection = parent::__construct($this->_data_base_connection_string , $this->_data_base_user, $this->_data_base_pass, array(\PDO::ATTR_PERSISTENT => false));
             }
         } catch (\PDOException $e) {
             throw new \Exception("DB CONNECTION ERROR! : ". $e->getMessage());
         } catch (\Exception $e){
             throw new \Exception("DB CONNECTION EXCEPTION! : ". $e->getMessage());
         }
-        $this->_data_base_connection->exec("SET NAME utf8");
+        $this->exec("SET NAME utf8");
         return true;
     }
 }
